@@ -29,5 +29,6 @@ public class TurretIO {
         public double motorVoltage = 0;
         public double motorAngleDegrees = 0;
         public double motorVelocityDegreesPerSecond = 0;
+        public double profiledTargetPositionDegrees = 0;
     }
 }

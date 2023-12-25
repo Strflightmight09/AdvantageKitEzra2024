@@ -9,9 +9,9 @@ import java.util.function.Supplier;
 public class TurretCommands {
     private static final Turret TURRET = Turret.getInstance();
 
-    public static Command getAlignToHubCommand(Supplier<Pose2d> robotPosition) {
+    public static Command getAlignToHubCommand() {
         return new RunCommand(
-                () -> TURRET.alignToHub(robotPosition.get()),
+                () -> TURRET.alignToHub(),
                 TURRET
         );
     }
