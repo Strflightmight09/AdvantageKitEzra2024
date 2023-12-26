@@ -24,6 +24,9 @@ public class TurretIO {
     protected void stop() {
     }
 
+    protected void setBrake(boolean brake) {
+    }
+
     @AutoLog
     protected static class TurretInputs {
         public double motorVoltage = 0;

@@ -3,11 +3,11 @@ package frc.trigon.robot.subsystems.turret;
 
 import edu.wpi.first.math.geometry.*;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.trigon.robot.RobotContainer;
+import frc.trigon.robot.subsystems.AbstractSubsystem;
 import org.littletonrobotics.junction.Logger;
 
-public class Turret extends SubsystemBase {
+public class Turret extends AbstractSubsystem {
     private final static Turret INSTANCE = new Turret();
     private final TurretIO turretIO = TurretIO.generateIO();
     private final TurretInputsAutoLogged turretInputs = new TurretInputsAutoLogged();
@@ -17,6 +17,16 @@ public class Turret extends SubsystemBase {
     }
 
     private Turret() {
+    }
+
+    @Override
+    public void setBrake(boolean brake) {
+        turretIO.setBrake(brake);
+    }
+
+    @Override
+    public void stop() {
+        turretIO.stop();
     }
 
     @Override

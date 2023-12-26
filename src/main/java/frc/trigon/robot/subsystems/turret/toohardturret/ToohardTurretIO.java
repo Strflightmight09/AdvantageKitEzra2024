@@ -3,6 +3,7 @@ package frc.trigon.robot.subsystems.turret.toohardturret;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.math.geometry.Rotation2d;
 import frc.trigon.robot.subsystems.turret.TurretIO;
 import frc.trigon.robot.subsystems.turret.TurretInputsAutoLogged;
@@ -27,5 +28,13 @@ public class ToohardTurretIO extends TurretIO {
     @Override
     protected void stop() {
         motor.stopMotor();
+    }
+
+    @Override
+    protected void setBrake(boolean brake) {
+        if (brake)
+            motor.setNeutralMode(NeutralModeValue.Brake);
+        else
+            motor.setNeutralMode(NeutralModeValue.Coast);
     }
 }
