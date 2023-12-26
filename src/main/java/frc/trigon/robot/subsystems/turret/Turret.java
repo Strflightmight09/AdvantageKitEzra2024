@@ -42,11 +42,11 @@ public class Turret extends AbstractSubsystem {
     }
 
     Rotation2d calculateDegreesToHub() {
-        Pose2d currentBluePose = RobotContainer.POSE_ESTIMATOR.getCurrentPose().toCurrentAlliancePose();
-        double yDistance = TurretConstants.HUB_POSITION.getY() - currentBluePose.getY();
-        double xDistance = TurretConstants.HUB_POSITION.getX() - currentBluePose.getX();
+        Pose2d currentAlliancePose = RobotContainer.POSE_ESTIMATOR.getCurrentPose().toCurrentAlliancePose();
+        double yDistance = TurretConstants.HUB_POSITION.getY() - currentAlliancePose.getY();
+        double xDistance = TurretConstants.HUB_POSITION.getX() - currentAlliancePose.getX();
         double targetAngleRadians = Math.atan2(yDistance, xDistance);
-        return Rotation2d.fromRadians(targetAngleRadians - currentBluePose.getRotation().getRadians());
+        return Rotation2d.fromRadians(targetAngleRadians - currentAlliancePose.getRotation().getRadians());
     }
 
     private Rotation2d limitAngle(Rotation2d targetAngle) {
