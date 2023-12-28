@@ -7,6 +7,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.math.geometry.Rotation2d;
 import frc.trigon.robot.subsystems.turret.TurretIO;
 import frc.trigon.robot.subsystems.turret.TurretInputsAutoLogged;
+import frc.trigon.robot.utilities.Conversions;
 
 public class ToohardTurretIO extends TurretIO {
     private final TalonFX motor = ToohardTurretConstants.MOTOR;
@@ -16,8 +17,9 @@ public class ToohardTurretIO extends TurretIO {
     @Override
     protected void updateInputs(TurretInputsAutoLogged inputs) {
         inputs.motorVoltage = MOTOR_VOLTAGE_STATUS_SIGNAL.refresh().getValue();
-        inputs.motorAngleDegrees = ToohardTurretConstants.ENCODER_POSITION_SIGNAL.refresh().getValue();
-        inputs.motorVelocityDegreesPerSecond = ToohardTurretConstants.ENCODER_VELOCITY_SIGNAL.refresh().getValue();
+        inputs.motorAngleDegrees = getMotorAngleDegrees();
+        inputs.motorVelocityDegreesPerSecond = getMotorVelocityDegreesPerSecond();
+        inputs.profiledTargetPositionDegrees = positionRequest.Position;
     }
 
     @Override
@@ -36,5 +38,13 @@ public class ToohardTurretIO extends TurretIO {
             motor.setNeutralMode(NeutralModeValue.Brake);
         else
             motor.setNeutralMode(NeutralModeValue.Coast);
+    }
+
+    private double getMotorAngleDegrees() {
+        return Conversions.revolutionsToDegrees(ToohardTurretConstants.ENCODER_POSITION_SIGNAL.refresh().getValue());
+    }
+
+    private double getMotorVelocityDegreesPerSecond() {
+        return Conversions.revolutionsToDegrees(ToohardTurretConstants.ENCODER_VELOCITY_SIGNAL.refresh().getValue());
     }
 }

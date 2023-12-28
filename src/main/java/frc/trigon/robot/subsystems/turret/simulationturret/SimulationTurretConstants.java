@@ -25,7 +25,7 @@ public class SimulationTurretConstants {
     private static final TrapezoidProfile.Constraints CONSTRAINTS = new TrapezoidProfile.Constraints(MAX_MOTOR_VELOCITY, MAX_MOTOR_ACCELERATION);
 
     private static final double
-            P = 50,
+            P = 600,
             I = 0,
             D = 0;
     static final ProfiledPIDController PROFILED_PID_CONTROLLER = new ProfiledPIDController(P, I, D, CONSTRAINTS);

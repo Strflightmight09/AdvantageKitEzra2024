@@ -24,20 +24,20 @@ public class ToohardTurretConstants {
             D = 0;
     private static final double
             KS = 0,
-            KG = 0,
             KV = 0,
             KA = 0;
+
+    static final double
+            MOTION_MAGIC_JERK = 2,
+            MOTION_MAGIC_ACCELERATION = 3,
+            MOTION_MAGIC_CRUISE_VELOCITY = 5;
+
     static final TalonFX MOTOR = new TalonFX(MOTOR_ID);
     static final CANcoder ENCODER = new CANcoder(ENCODER_ID);
 
     static final StatusSignal<Double>
             ENCODER_POSITION_SIGNAL = ENCODER.getPosition(),
             ENCODER_VELOCITY_SIGNAL = ENCODER.getVelocity();
-
-    static final double
-            MOTION_MAGIC_JERK = 2,
-            MOTION_MAGIC_ACCELERATION = 3,
-            MOTION_MAGIC_CRUISE_VELOCITY = 5;
 
     static {
         configureEncoder();
@@ -55,7 +55,6 @@ public class ToohardTurretConstants {
         config.Slot0.kI = I;
         config.Slot0.kD = D;
         config.Slot0.kS = KS;
-        config.Slot0.kG = KG;
         config.Slot0.kV = KV;
         config.Slot0.kA = KA;
 

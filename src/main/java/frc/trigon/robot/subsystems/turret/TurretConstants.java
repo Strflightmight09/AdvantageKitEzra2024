@@ -21,7 +21,7 @@ public class TurretConstants {
     private static final double
             TURRET_MECHANISM_ROOT_X = 1,
             TURRET_MECHANISM_ROOT_Y = 1;
-    @AutoLogOutput(key = "Turret/TurretMechanism")
+
     static final Mechanism2d TURRET_MECHANISM = new Mechanism2d(
             TURRET_MECHANISM_WIDTH,
             TURRET_MECHANISM_HEIGHT

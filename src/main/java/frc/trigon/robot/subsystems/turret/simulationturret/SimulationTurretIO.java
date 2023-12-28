@@ -21,17 +21,17 @@ public class SimulationTurretIO extends TurretIO {
         inputs.motorVoltage = motorVoltage;
         inputs.motorAngleDegrees = getMotorAngleDegrees();
         inputs.motorVelocityDegreesPerSecond = getMotorVelocityDegreesPerSecond();
-        inputs.profiledTargetPositionDegrees = Conversions.revolutionsToDegrees(SimulationTurretConstants.PROFILED_PID_CONTROLLER.getSetpoint().position);
+        inputs.profiledTargetPositionDegrees = getProfiledTargetPositionDegrees();
     }
 
     @Override
     protected void setTargetAngle(Rotation2d targetAngle) {
-        setMotorVoltageFromPower(calculateMotorVoltage(targetAngle));
+        setMotorVoltage(calculateMotorVoltage(targetAngle));
     }
 
     @Override
     protected void stop() {
-        setMotorVoltageFromPower(0);
+        setMotorVoltage(0);
     }
 
     private double calculateMotorVoltage(Rotation2d targetAngle) {
@@ -40,9 +40,9 @@ public class SimulationTurretIO extends TurretIO {
         return pidOutput + feedforward;
     }
 
-    private void setMotorVoltageFromPower(double power) {
+    private void setMotorVoltage(double voltage) {
         motorVoltage = MathUtil.clamp(
-                Conversions.compensatedPowerToVoltage(power, SimulationTurretConstants.VOLTAGE_COMPENSATION_SATURATION),
+                voltage,
                 -SimulationTurretConstants.VOLTAGE_COMPENSATION_SATURATION,
                 SimulationTurretConstants.VOLTAGE_COMPENSATION_SATURATION
         );
@@ -55,5 +55,9 @@ public class SimulationTurretIO extends TurretIO {
 
     private double getMotorVelocityDegreesPerSecond() {
         return Units.radiansToDegrees(motor.getAngularVelocityRadPerSec());
+    }
+
+    private double getProfiledTargetPositionDegrees() {
+        return Conversions.revolutionsToDegrees(SimulationTurretConstants.PROFILED_PID_CONTROLLER.getSetpoint().position);
     }
 }
