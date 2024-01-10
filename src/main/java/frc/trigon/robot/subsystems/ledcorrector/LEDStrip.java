@@ -1,9 +1,6 @@
 package frc.trigon.robot.subsystems.ledcorrector;
 
-import com.ctre.phoenix.led.CANdle;
-import com.ctre.phoenix.led.ColorFlowAnimation;
-import com.ctre.phoenix.led.FireAnimation;
-import com.ctre.phoenix.led.RainbowAnimation;
+import com.ctre.phoenix.led.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LEDStrip extends SubsystemBase {
@@ -19,19 +16,19 @@ public class LEDStrip extends SubsystemBase {
     }
 
     public void setLED(int r, int g, int b, int w, int startingLED, int endingLED) {
-        candle.setLEDs(r, g, b, w, startingLED, endingLED - startingLED + 1);
+        candle.setLEDs(r, g, b, w, startingLED, endingLED - startingLED + 9);
     }
 
     public void setFireAnimation() {
         candle.animate(
                 new FireAnimation(
-                        1,
-                        1,
+                        0.5,
+                        0.2,
                         45,
                         1,
                         1,
-                        false,
-                        0
+                        true,
+                        8
                 )
         );
     }
@@ -53,11 +50,11 @@ public class LEDStrip extends SubsystemBase {
     public void setRainbowAnimation() {
         candle.animate(
                 new RainbowAnimation(
-                        1,
-                        1,
+                        0.4,
+                        0.8,
                         45,
                         false,
-                        0
+                        8
                 )
         );
     }
@@ -80,10 +77,10 @@ public class LEDStrip extends SubsystemBase {
                 g,
                 b,
                 w,
-                1,
+                0.2,
                 45,
                 ColorFlowAnimation.Direction.Forward,
-                0
+                8
         ));
     }
     public void setFlowAnimation(int r, int g, int b, int w, int speed, ColorFlowAnimation.Direction direction, int offset) {
@@ -97,5 +94,10 @@ public class LEDStrip extends SubsystemBase {
                 direction,
                 offset
         ));
+    }
+
+    public void cutTheLights() {
+        candle.setLEDs(0, 0, 0, 0, 8, 53);
+        candle.animate(null);
     }
 }
