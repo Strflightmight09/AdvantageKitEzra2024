@@ -270,6 +270,7 @@ public class Swerve extends AbstractSubsystem {
                 this::getSelfRelativeVelocity,
                 this::selfRelativeDrive,
                 constants.getPathFollowerConfig(),
+                () -> false,
                 this
         );
     }

@@ -65,7 +65,7 @@ public class Turret extends AbstractSubsystem {
     }
 
     private Pose3d getTurretPosition() {
-        return new Pose3d(new Translation3d(), new Rotation3d(0, 0, Units.degreesToRadians(turretInputs.motorAngleDegrees)));
+        return new Pose3d(new Translation3d(0, 0, 0), new Rotation3d(0, 0, Units.degreesToRadians(turretInputs.motorAngleDegrees))).transformBy(TurretConstants.TRANSFORM);
     }
 
     private void updateMechanism() {
@@ -75,4 +75,3 @@ public class Turret extends AbstractSubsystem {
         Logger.recordOutput("Mechanisms/TurretMechanism", TurretConstants.TURRET_MECHANISM);
     }
 }
-
